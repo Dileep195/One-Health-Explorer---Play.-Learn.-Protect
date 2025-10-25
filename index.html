@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Health Explorer - Play. Learn. Protect.</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+        <div class="animated-bg">
+            <div class="floating-icon human">👥</div>
+            <div class="floating-icon animal">🐄</div>
+            <div class="floating-icon chicken">🐔</div>
+            <div class="floating-icon tree">🌳</div>
+            <div class="floating-icon water">💧</div>
+            <div class="floating-icon dog">🐕</div>
+        </div>
+        <div class="welcome-content">
+            <h1 class="app-title">One Health Explorer</h1>
+            <p class="tagline">Play. Learn. Protect.</p>
+            <div class="language-selector">
+                <label for="language">Language:</label>
+                <select id="language" class="form-control">
+                    <option value="en">🇬🇧 English</option>
+                    <option value="hi">🇮🇳 हिंदी</option>
+                    <option value="es">🇪🇸 Español</option>
+                </select>
+            </div>
+            <button id="start-game" class="btn btn--primary btn--lg btn--full-width">START GAME</button>
+            <button id="settings-btn" class="btn btn--outline btn--sm settings-btn">⚙️ Settings</button>
+        </div>
+    </div>
+
+    <!-- Character Introduction Screen -->
+    <div id="intro-screen" class="screen">
+        <button class="back-btn-top" data-back-to="welcome-screen">← Back</button>
+        <div class="character-scene">
+            <div class="dr-aisha">
+                <div class="character-avatar">👩‍⚕️</div>
+                <div class="speech-bubble">
+                    <p>Hello, Junior Officer! Welcome to the One Health team. We solve health mysteries by connecting the dots between people, animals, and the environment.</p>
+                    <p>Are you ready for your first mission?</p>
+                </div>
+            </div>
+            <div class="intro-actions">
+                <button id="ready-btn" class="btn btn--primary btn--lg">YES, I'M READY!</button>
+                <button id="tell-more-btn" class="btn btn--outline">TELL ME MORE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- One Health Explanation Modal -->
+    <div id="one-health-modal" class="modal">
+        <div class="modal-content">
+            <h3>What is One Health?</h3>
+            <div class="one-health-pillars">
+                <div class="pillar">
+                    <div class="pillar-icon">👥</div>
+                    <h4>Human Health</h4>
+                    <p>Keeping people healthy and safe</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon">🐄</div>
+                    <h4>Animal Health</h4>
+                    <p>Caring for animals and livestock</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon">🌍</div>
+                    <h4>Environmental Health</h4>
+                    <p>Protecting our planet and ecosystems</p>
+                </div>
+            </div>
+            <p class="modal-description">When we take care of all three together, everyone stays healthier!</p>
+            <button id="got-it-btn" class="btn btn--primary btn--full-width">GOT IT!</button>
+        </div>
+    </div>
+
+    <!-- Mission Selection Screen -->
+    <div id="missions-screen" class="screen">
+        <button class="back-btn-top" data-back-to="intro-screen">← Back</button>
+        <div class="player-stats">
+            <div class="stat">
+                <span class="stat-label">Score:</span>
+                <span id="total-score" class="stat-value">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Badges:</span>
+                <span id="badge-count" class="stat-value">0/9</span>
+            </div>
+        </div>
+        <h2>Choose Your Mission</h2>
+        <div class="missions-grid">
+            <div id="mission-1" class="mission-card unlocked" data-mission="1">
+                <div class="mission-image">🏡🐔</div>
+                <h3>The Case of the Coughing Farm</h3>
+                <div class="mission-badges">
+                    <span class="badge-preview">🕵️‍♂️</span>
+                    <span class="badge-preview">🛡️</span>
+                    <span class="badge-preview">🤝</span>
+                </div>
+                <div class="mission-status unlocked">UNLOCKED</div>
+            </div>
+            <div class="mission-card locked">
+                <div class="mission-image">🌡️🏥</div>
+                <h3>The Mysterious Fever Outbreak</h3>
+                <div class="mission-status locked">LOCKED</div>
+            </div>
+            <div class="mission-card locked">
+                <div class="mission-image">💧🚰</div>
+                <h3>Clean Water Quest</h3>
+                <div class="mission-status locked">LOCKED</div>
+            </div>
+        </div>
+        <button id="view-badges-btn" class="btn btn--outline">VIEW MY BADGES</button>
+    </div>
+
+    <!-- Badge Collection Screen -->
+    <div id="badges-screen" class="screen">
+        <button class="back-btn-top" data-back-to="missions-screen">← Back</button>
+        <h2>My Badge Collection</h2>
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div id="badges-grid" class="badges-grid">
+            <!-- Badges will be populated by JavaScript -->
+        </div>
+        <button id="back-to-missions" class="btn btn--primary">BACK TO MISSIONS</button>
+    </div>
+
+    <!-- Game Screen: Mission 1 -->
+    <div id="game-screen" class="screen">
+        <button class="back-btn-top" data-back-to="missions-screen">← Back</button>
+        <!-- Scene 1: Introduction -->
+        <div id="scene-intro" class="game-scene active">
+            <div class="farm-background">
+                <div class="farmer worried">👨‍🌾</div>
+                <div class="sick-chicken coughing">🐔💭</div>
+                <div class="sick-child">🤧</div>
+            </div>
+            <div class="dr-aisha game">
+                <div class="character-avatar">👩‍⚕️</div>
+                <div class="speech-bubble">
+                    <p>Hello, Junior Officer! We have a situation at Sunnybrook Farm. The farmer and his family are feeling unwell with a bad cough, and even the chickens seem sick!</p>
+                    <p>This is a classic One Health puzzle. We need your sharp eyes to find the connection and stop this outbreak. Are you ready for your mission?</p>
+                </div>
+            </div>
+            <button id="start-investigation" class="btn btn--primary btn--lg">START INVESTIGATION</button>
+        </div>
+
+        <!-- Scene 2: Investigation Map -->
+        <div id="scene-map" class="game-scene">
+            <button class="back-btn-scene" data-back-to="scene-intro">← Back</button>
+            <h3>Investigation Map</h3>
+            <p class="instruction">Where will you start your investigation? Remember, in One Health, everything is connected!</p>
+            <div class="clue-counter">
+                <span>Clues Found: <span id="clues-found">0</span>/3</span>
+            </div>
+            <div class="farm-map">
+                <div id="chicken-coop" class="location" data-location="coop">
+                    <div class="location-icon">🏠🐔</div>
+                    <div class="location-label">Chicken Coop</div>
+                    <div class="pulsing-indicator"></div>
+                </div>
+                <div id="farmhouse" class="location" data-location="house">
+                    <div class="location-icon">🏡</div>
+                    <div class="location-label">Farmhouse</div>
+                    <div class="pulsing-indicator"></div>
+                </div>
+                <div id="feed-shed" class="location" data-location="shed">
+                    <div class="location-icon">🏚️</div>
+                    <div class="location-label">Feed Shed</div>
+                    <div class="pulsing-indicator"></div>
+                </div>
+            </div>
+            <button id="solve-puzzle-btn" class="btn btn--primary btn--lg" style="display: none;">SOLVE THE MYSTERY</button>
+        </div>
+
+        <!-- Location Scenes -->
+        <div id="location-coop" class="game-scene location-scene">
+            <div class="location-background coop">
+                <div id="clickable-chicken" class="clickable-item chicken">🐔</div>
+                <div class="chicken-droppings">💩</div>
+            </div>
+            <h3>The Chicken Coop</h3>
+            <p>Click on the chicken to investigate...</p>
+            <button id="back-to-map-1" class="btn btn--outline back-btn">← Back to Map</button>
+        </div>
+
+        <div id="location-house" class="game-scene location-scene">
+            <div class="location-background house">
+                <div class="sick-child-scene">🤒</div>
+                <div id="clickable-medicine" class="clickable-item medicine">💊</div>
+            </div>
+            <h3>The Farmhouse</h3>
+            <p>Click on the medicine bottle to investigate...</p>
+            <button id="back-to-map-2" class="btn btn--outline back-btn">← Back to Map</button>
+        </div>
+
+        <div id="location-shed" class="game-scene location-scene">
+            <div class="location-background shed">
+                <div class="feed-sacks">🛒</div>
+                <div id="clickable-corner" class="clickable-item moldy-corner">🌫️</div>
+            </div>
+            <h3>The Feed Shed</h3>
+            <p>Click on the dusty corner to investigate...</p>
+            <button id="back-to-map-3" class="btn btn--outline back-btn">← Back to Map</button>
+        </div>
+
+        <!-- Puzzle Scene -->
+        <div id="scene-puzzle" class="game-scene">
+            <button class="back-btn-scene" data-back-to="scene-map">← Back to Map</button>
+            <h3>Connect the Dots</h3>
+            <div class="dr-aisha puzzle">
+                <div class="character-avatar">👩‍⚕️</div>
+                <div class="speech-bubble">
+                    <p>Excellent work, Officer! You've gathered all the clues. Now, connect the dots. What is the most likely chain of events? Drag the clues into the correct order on the timeline.</p>
+                </div>
+            </div>
+            <div class="collected-clues">
+                <div id="clue-chickens" class="clue-card draggable" draggable="true" data-clue="chickens">
+                    <div class="clue-icon">🐔</div>
+                    <div class="clue-text">Sick Chickens</div>
+                </div>
+                <div id="clue-ventilation" class="clue-card draggable" draggable="true" data-clue="ventilation">
+                    <div class="clue-icon">🌫️</div>
+                    <div class="clue-text">Poor Ventilation &amp; Mold</div>
+                </div>
+                <div id="clue-medicine" class="clue-card draggable" draggable="true" data-clue="medicine">
+                    <div class="clue-icon">💊</div>
+                    <div class="clue-text">Ineffective Medicine</div>
+                </div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-slot" data-slot="start">
+                    <div class="slot-label">THE START</div>
+                    <div class="drop-zone"></div>
+                </div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-slot" data-slot="spread">
+                    <div class="slot-label">THE SPREAD</div>
+                    <div class="drop-zone"></div>
+                </div>
+                <div class="timeline-arrow">→</div>
+                <div class="timeline-slot" data-slot="impact">
+                    <div class="slot-label">HUMAN IMPACT</div>
+                    <div class="drop-zone"></div>
+                </div>
+            </div>
+            <button id="check-solution" class="btn btn--primary btn--lg" disabled>CHECK SOLUTION</button>
+        </div>
+
+        <!-- Completion Scene -->
+        <div id="scene-completion" class="game-scene">
+            <div class="celebration">
+                <div class="confetti">🎉</div>
+                <h2>🎖️ MISSION ACCOMPLISHED!</h2>
+            </div>
+            <div class="farm-background happy">
+                <div class="farmer happy">👨‍🌾😊</div>
+                <div class="healthy-chickens">🐔✨</div>
+                <div class="happy-family">👨‍👩‍👧‍👦😊</div>
+            </div>
+            <div class="completion-content">
+                <h3>Your Actions:</h3>
+                <div class="actions-list">
+                    <div class="action">✓ Recommended biosecurity measures for the coop (isolating sick birds, using masks)</div>
+                    <div class="action">✓ Explained why antibiotics don't work for viruses</div>
+                    <div class="action">✓ Advised improving ventilation in animal sheds</div>
+                </div>
+                <h3>Badges Earned:</h3>
+                <div class="earned-badges">
+                    <div class="earned-badge">
+                        <span class="badge-icon">🕵️‍♂️</span>
+                        <div class="badge-info">
+                            <div class="badge-name">Outbreak Detective</div>
+                            <div class="badge-desc">For solving a complex zoonotic disease case</div>
+                        </div>
+                    </div>
+                    <div class="earned-badge">
+                        <span class="badge-icon">🛡️</span>
+                        <div class="badge-info">
+                            <div class="badge-name">Antibiotic Guardian</div>
+                            <div class="badge-desc">For preventing the misuse of antibiotics and fighting AMR</div>
+                        </div>
+                    </div>
+                    <div class="earned-badge">
+                        <span class="badge-icon">🤝</span>
+                        <div class="badge-info">
+                            <div class="badge-name">Animal Ally</div>
+                            <div class="badge-desc">For improving the welfare of farm animals</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="final-score">
+                    <h3>Total Score: <span id="mission-score">85</span> points!</h3>
+                </div>
+                <div class="completion-actions">
+                    <button id="view-all-badges" class="btn btn--outline">VIEW MY BADGES</button>
+                    <button id="next-mission" class="btn btn--secondary" disabled>NEXT MISSION<br><small>(Coming Soon!)</small></button>
+                    <button id="back-to-missions-final" class="btn btn--primary">BACK TO MISSIONS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dialogue Modal -->
+    <div id="dialogue-modal" class="modal">
+        <div class="modal-content dialogue">
+            <div id="dialogue-character" class="dialogue-character"></div>
+            <div id="dialogue-text" class="dialogue-text"></div>
+            <button id="dialogue-close" class="btn btn--primary">Continue</button>
+        </div>
+    </div>
+
+    <!-- Clue Unlock Modal -->
+    <div id="clue-modal" class="modal">
+        <div class="modal-content clue-unlock">
+            <div class="clue-animation">
+                <div id="clue-icon" class="clue-icon-large"></div>
+                <div class="unlock-text">CLUE UNLOCKED!</div>
+            </div>
+            <div id="clue-description" class="clue-description"></div>
+            <button id="clue-continue" class="btn btn--primary">Continue</button>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content quiz">
+            <h3 id="quiz-question">How can diseases spread from birds to humans?</h3>
+            <div class="drag-drop-zone">
+                <div class="drag-options">
+                    <div class="drag-item" draggable="true" data-correct="true">Touching Droppings</div>
+                    <div class="drag-item" draggable="true" data-correct="true">Airborne Dust</div>
+                    <div class="drag-item" draggable="true" data-correct="false">Eating Cooked Eggs</div>
+                    <div class="drag-item" draggable="true" data-correct="true">Close Contact with Sick Birds</div>
+                </div>
+                <div class="drop-target">
+                    <div class="drop-label">Zoonotic Transmission Routes</div>
+                    <div class="drop-area"></div>
+                </div>
+            </div>
+            <button id="check-quiz" class="btn btn--primary" disabled>CHECK ANSWER</button>
+            <div id="quiz-feedback" class="quiz-feedback"></div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content info">
+            <h3>Antibiotics vs. Viruses</h3>
+            <div class="comparison">
+                <div class="comparison-item">
+                    <div class="comparison-icon">🦠</div>
+                    <h4>Bacterium</h4>
+                    <p>Antibiotics work against these.</p>
+                </div>
+                <div class="vs">VS</div>
+                <div class="comparison-item">
+                    <div class="comparison-icon">🧬</div>
+                    <h4>Virus</h4>
+                    <p>But NOT against these! Using antibiotics wrongly can create superbugs (AMR).</p>
+                </div>
+            </div>
+            <button id="info-continue" class="btn btn--primary btn--full-width">GOT IT!</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content settings">
+            <h3>Settings</h3>
+            <div class="setting-item">
+                <label>Sound Effects:</label>
+                <div class="toggle">
+                    <input type="checkbox" id="sound-toggle" checked>
+                    <label for="sound-toggle" class="toggle-label">🔊</label>
+                </div>
+            </div>
+            <div class="setting-item">
+                <label for="settings-language">Language:</label>
+                <select id="settings-language" class="form-control">
+                    <option value="en">🇬🇧 English</option>
+                    <option value="hi">🇮🇳 हिंदी</option>
+                    <option value="es">🇪🇸 Español</option>
+                </select>
+            </div>
+            <div class="about-section">
+                <h4>About One Health</h4>
+                <p>One Health recognizes that the health of people, animals, and the environment are interconnected. By working together across these areas, we can achieve better health outcomes for everyone.</p>
+            </div>
+            <button id="settings-close" class="btn btn--primary btn--full-width">CLOSE</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
